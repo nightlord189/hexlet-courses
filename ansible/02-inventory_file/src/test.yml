@@ -1,0 +1,11 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - name: Check appservers count
+      ansible.builtin.fail:
+        msg: "we don't see 5 appservers"
+      run_once: yes
+      when: 'groups["appservers"] | length != 5'
+
