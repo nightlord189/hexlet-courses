@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    file: /tmp/hello_world
+
+  tasks:
+    - name: Retrieve file status
+      ansible.builtin.stat:
+        path: "{{ file }}"
+      register: result
+
+    - name: Check if the file already exists
+      ansible.builtin.fail:
+        msg: "File `{{ file }}` has not been created"
+      when: not result.stat.exists
+
