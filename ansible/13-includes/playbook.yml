@@ -1,0 +1,11 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    # BEGIN (write your solution here)
+    - import_tasks: foo.yml
+    # END
+
+    - name: 'Check result'
+      fail:
+        msg: '`foo.yml` is expected to be imported'
+      when: result is not defined

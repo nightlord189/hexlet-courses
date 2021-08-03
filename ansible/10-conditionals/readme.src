@@ -1,0 +1,2 @@
+playbook.yml
+Поставьте ограничение nodejs_install_method == "source" на задачу, которая ставит nodejs из исходников.

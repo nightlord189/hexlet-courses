@@ -1,0 +1,2 @@
+- shell: echo 'i am from include'
+  register: result
