@@ -1,0 +1,43 @@
+---
+
+- hosts: jobservers
+  gather_facts: no
+
+  tasks:
+    - name: Check version
+      fail:
+        msg: "Expected `version` is 2"
+      when: version != 2
+
+    - name: Check redis_port
+      fail:
+        msg: "Expected `redis_port` is 6390"
+      when: redis_port != 6390
+
+    - name: Check database
+      fail:
+        msg: "Expected `database` is `postgresql`"
+      when: database != 'postgresql'
+
+    - name: Check memcache_port
+      fail: msg="Expected `memcache_port` is undefined"
+      when: memcache_port is defined
+
+- hosts: webservers
+  gather_facts: no
+  tasks:
+    - name: Check version
+      fail: msg="Expected `version` is 1"
+      when: version != 1
+
+    - name: Check memcache_port
+      fail: msg=""
+      when: memcache_port != 5000
+
+    - name: Check database
+      fail: msg="Expected `database` is `postgresql`"
+      when: database != 'postgresql'
+
+    - name: Check redis_port
+      fail: msg="Expected `redis_port` is undefined"
+      when: redis_port is defined
